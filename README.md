@@ -216,3 +216,11 @@
     3. 소스 코드 하나하나를 더욱 신중하게 짤 수 있기 때문에 깨끗한 코드가 나올 확률이
     높다.
 ```
+
+### FireEvent API
+
+[공식문서](https://testing-library.com/docs/dom-testing-library/api-events/)
+
+```
+    유저가 발생시키는 액션(이벤트)에 대한 테스트를 해야하는 경우 사용한다.
+```
