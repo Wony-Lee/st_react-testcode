@@ -224,3 +224,37 @@
 ```
     유저가 발생시키는 액션(이벤트)에 대한 테스트를 해야하는 경우 사용한다.
 ```
+
+## 더 나은 리액트 테스트를 위해 참고할 것들
+
+### Query 사용 우선 순위
+
+[공식문서](https://testing-library.com/docs/queries/about/#proiority)
+
+```
+    screen.getByTestId()
+    현재까지는 getByTestId 쿼리를 이용해서 엘레멘트에 접근해서 테스트를 진행했는데,
+    이 방법이 편리하긴 하지만 testing library에서 추천하는 쿼리 사용 우선 순위가
+    있기 때문에 위에 링크를 한번 보고 가도록 하자.
+```
+
+### userEvent -> fireEvent
+
+[참고문서](https://github.com/testing-library/user-event/blob/5feaa942f46bb37d96c2f2fbeb4b33e8beff75ad/src/click.js#L87-L103)
+
+```
+    이전에 테스팅에서 버튼을 클릭했을 때 fireEvent API를 사용했다.
+    이때 fireEvent를 사용해서 잘 처리를 해줬지만 userEvent API를
+    사용하는게 더 좋은 방법이다. fireEvent.click() < userEvent.click()
+
+    userEvent
+    userEvent는 fireEvent를 사용해서 만들어졌다. userEvent의 내부 코드를 보면
+    fireEvent를 사용하면서 엘리먼트의 타입에 따라서 Label을 클릭 했을 때,
+    checkbox, radio를 클릭했을 때 그 엘리먼트 타입에 맞는 더욱 적절한 반응을
+    보여준다.
+
+    예를 들어서 fireEvent 로 버튼을 클릭하면 fireEvent.click(button) 버튼이
+    focus되지 않는다. 하지만 userEvent로 클릭하면 userEvent.click(button)
+    버튼이 focuse가 된다. 이렇게 실제 사용하는 유저가 보기에 실제 버튼을
+    클릭하는 행위가 더 잘 표현되기 때문에 userEvent를 사용하는게 더 좋은 방법이다.
+```
